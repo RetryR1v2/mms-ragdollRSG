@@ -1,21 +1,22 @@
 local RSGCore = exports['rsg-core']:GetCoreObject()
-
+local ped = PlayerPedId()
 local Ragdollactive = false
 ---------------------------------------------------------------------------------
 
 
-CreateThread(function()
+Citizen.CreateThread(function()
     while true do
-        Wait(200)
+        Wait(0)
         if IsControlJustPressed(0, RSGCore.Shared.Keybinds[Config.RagdollKey]) then -- Ragdoll Key
-            if not PlayerData.metadata["ishandcuffed"] and not PlayerData.metadata["isdead"] and not IsPauseMenuActive() and Ragdollactive == false then
-                local ped = PlayerPedId()
+            if Ragdollactive == false then
                 Ragdollactive = true
-                SetPedToRagdoll(ped,Config.RagdollTime,Config.RagdollTime)
-                Citizen.Wait(Config.RagdollTime)
-                Citizen.Wait(1000)
+                SetPedToRagdoll(ped,Config.RagdollTime,Config.RagdollTime,3)
+                SetPedRagdollForceFall(ped)
+            elseif Ragdollactive == true then
+                ResetPedRagdollTimer(ped)
+                Citizen.InvokeNative(0x221F4D9912B7FE86, ped,true)
                 Ragdollactive = false
-                end
             end
         end
+    end
 end)

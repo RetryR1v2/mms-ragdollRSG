@@ -2,5 +2,5 @@ Config = {}
 
 
 
-Config.RagdollKey = 'Z'  -----Ragdoll Key
-Config.RagdollTime = 3000  ---- 3000 = 3 Sec
+Config.RagdollKey = 'G'  -----Ragdoll Key
+Config.RagdollTime = 90000  ---- 30000 = 30 Sec
